@@ -6,6 +6,7 @@ const saveUserToDB = async (user) => {
       name: user.displayName || "No Name",
       email: user.email,
       uid: user.uid,
+      role: "user"
     });
   } catch (err) {
     console.error("Axios error:", err);

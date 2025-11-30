@@ -1,5 +1,5 @@
 import connectDB from "@/lib/dib";
-import Product from "@/Models/product";
+import Product from "@/models/product";
 
 const handler = async (req, res) => {
     await connectDB();
