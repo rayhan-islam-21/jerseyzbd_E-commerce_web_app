@@ -19,12 +19,12 @@ const Layout = ({ children }) => {
       >
         <Sidebar sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
       </div>
-
       {/* Main Content */}
       <div className="flex-1 transition-all duration-500 ease-in-out">
         <Header toggleSidebar={toggleSidebar} />
 
-        <div className="p-4">{children}</div>
+      <div className="p-4 bg-[linear-gradient(168deg,#000000,#0d111c)]">{children}</div>
+  
       </div>
     </div>
   );

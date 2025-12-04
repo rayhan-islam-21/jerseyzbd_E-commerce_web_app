@@ -1,8 +1,16 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { FaBars, FaBoxOpen, FaChevronDown, FaShoppingCart, FaTachometerAlt, FaTimes, FaUsers } from "react-icons/fa";
-import { useState } from 'react';
+import {
+  FaBars,
+  FaBoxOpen,
+  FaChevronDown,
+  FaShoppingCart,
+  FaTachometerAlt,
+  FaTimes,
+  FaUsers,
+} from "react-icons/fa";
+import { useState } from "react";
 
 const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
   const pathname = usePathname();
@@ -19,25 +27,21 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
         { name: "Categories", path: "/admin/products/categories" },
       ],
     },
-    { name: "Orders", icon: <FaShoppingCart />, path: "/admin/orders", badge: 3 },
+    {
+      name: "Orders",
+      icon: <FaShoppingCart />,
+      path: "/admin/orders",
+      badge: 3,
+    },
     { name: "Users", icon: <FaUsers />, path: "/admin/users" },
   ];
 
   return (
     <>
-      {/* Mobile Top Bar */}
-      <div className="md:hidden flex items-center justify-between bg-gray-800 text-white p-4">
-        <div className="text-xl font-bold">Admin Panel</div>
-        <button onClick={toggleSidebar}>
-          <FaBars
-           size={24} />
-        </button>
-      </div>
-
       {/* Sidebar */}
       <div
         className={`
-          bg-black text-white h-screen transition-all duration-200 ease-in-out
+          bg-[linear-gradient(168deg,#000000,#0d111c)] text-white h-screen border-r border-r-white/10 transition-all duration-200 ease-in-out
           overflow-hidden
           fixed inset-y-0 left-0 z-50
           ${sidebarOpen ? "w-64 translate-x-0" : "w-0 -translate-x-full"}
@@ -85,7 +89,9 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                     {item.icon}
                     <span className="ml-3">{item.name}</span>
                     <FaChevronDown
-                      className={`ml-auto transition-transform ${openProducts ? "rotate-180" : ""}`}
+                      className={`ml-auto transition-transform ${
+                        openProducts ? "rotate-180" : ""
+                      }`}
                     />
                   </button>
                   {openProducts && (

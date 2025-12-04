@@ -1,0 +1,85 @@
+{
+    "id": "401d3fae-4262-48c9-891f-461fd776d49b",
+    "title": "Bangladesh - Subnational Administrative Boundaries",
+    "name": "cod-ab-bgd",
+    "notes": "Bangladesh administrative level 0-4 boundaries (COD-AB) dataset. These administrative boundaries were established in:  2022 NOTE:  COD-PS extends only to administrative level 3.   The spelling of 5 districts (and two of their divisions) were changed in 2018.  The new spellings are Chattogram (for Chittagong), Barishal (for Barisal), Cumilla (for Comilla), Jashore (for Jessore) and Bogura (for Bogra).  These changes will be reflected in the next COD-AB update. This COD-AB was most recently reviewed for accuracy and necessary changes in October 2024.  The COD-AB requires improvements. Sourced from Bangladesh Bureau of Statistics (BBS) Vetting by Information Technology Outreach Services (ITOS) with funding from USAID. This COD-AB is suitable for database or GIS linkage to the Bangladesh COD-PS. No edge-matched (COD-EM) version of this COD-AB has yet been prepared. Please see the COD Portal. Administrative level 1 contains 8 feature(s).  The normal administrative level 1 feature type is 'Division'. Administrative level 2 contains 64 feature(s).  The normal administrative level 2 feature type is 'District (Zila)'. Administrative level 3 contains 544 feature(s).  The normal administrative level 3 feature type is 'upazila (subdistrict) or thana'. Administrative level 4 contains 5,160 feature(s).  The normal administrative level 4 feature type is 'currently not known'. Recommended cartographic projection:  Asia South Albers Equal Area Conic This metadata was last updated on January 17, 2025.",
+    "dataset_source": "Bangladesh Bureau of Statistics (BBS)",
+    "organization": "OCHA Regional Office for Asia and the Pacific (ROAP)",
+    "dataset_date": "[2022-01-01T00:00:00 TO 2024-10-31T23:59:59]",
+    "last_modified": "2023-04-04T19:22:28.912387",
+    "data_update_frequency": "As needed",
+    "groups": [
+        "Bangladesh"
+    ],
+    "license_title": "Creative Commons Attribution for Intergovernmental Organisations (CC BY-IGO)",
+    "methodology": "Other",
+    "methodology_other": "Obtained from government surveys.\r\nQuality assured, configured, and published as live services by ITOS.\r\n",
+    "caveats": null,
+    "tags": [
+        "administrative boundaries-divisions",
+        "gazetteer",
+        "geodata"
+    ],
+    "resources": [
+        {
+            "created": "2018-04-25T05:53:49.878981",
+            "description": "Bangladesh administrative level 0-4 boundary gazetteer",
+            "format": "XLSX",
+            "download_url": "https://data.humdata.org/dataset/401d3fae-4262-48c9-891f-461fd776d49b/resource/8198a97e-be80-4d87-9466-8a07477d5f25/download/bgd_adminboundaries_tabulardata.xlsx",
+            "id": "8198a97e-be80-4d87-9466-8a07477d5f25",
+            "last_modified": "2023-04-04T19:22:28.912387",
+            "metadata_modified": "2025-02-25T21:08:17.998295",
+            "microdata": false,
+            "dataset_id": "401d3fae-4262-48c9-891f-461fd776d49b",
+            "resource_type": "file.upload",
+            "name": "BGD_AdminBoundaries_TabularData.xlsx",
+            "mimetype": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+            "size": "418.9K"
+        },
+        {
+            "created": "2018-04-25T05:46:56.297418",
+            "description": "Bangladesh administrative level 0-4 boundary shapefiles",
+            "format": "SHP",
+            "download_url": "https://data.humdata.org/dataset/401d3fae-4262-48c9-891f-461fd776d49b/resource/08736818-ae72-44a9-abd6-a51915c24921/download/bgd_adm_bbs_20201113_shp.zip",
+            "id": "08736818-ae72-44a9-abd6-a51915c24921",
+            "last_modified": "2020-11-17T09:07:49.697972",
+            "metadata_modified": "2025-02-25T21:08:27.434811",
+            "microdata": false,
+            "dataset_id": "401d3fae-4262-48c9-891f-461fd776d49b",
+            "resource_type": "file.upload",
+            "name": "bgd_adm_bbs_20201113_SHP.zip",
+            "mimetype": "application/x-zip-compressed",
+            "size": "186.6M"
+        },
+        {
+            "created": "2020-11-17T08:07:27.286764",
+            "description": "Bangladesh administrative level 0-4 boundary EMF files.  (Levels 0-2 labeled.)",
+            "format": "EMF",
+            "download_url": "https://data.humdata.org/dataset/401d3fae-4262-48c9-891f-461fd776d49b/resource/888d8fa7-3094-4cfb-b488-db3bb7725c39/download/bgd_adm_bbs_20201113_emf.zip",
+            "id": "888d8fa7-3094-4cfb-b488-db3bb7725c39",
+            "last_modified": "2020-11-17T09:35:29.542067",
+            "metadata_modified": "2023-11-08T22:08:14.246053",
+            "microdata": false,
+            "dataset_id": "401d3fae-4262-48c9-891f-461fd776d49b",
+            "resource_type": "file.upload",
+            "name": "bgd_adm_bbs_20201113_EMF.zip",
+            "mimetype": "application/x-zip-compressed",
+            "size": "1.6M"
+        },
+        {
+            "created": "2020-11-17T09:09:30.698686",
+            "description": "Bangladesh administrative level 0-4 boundary geodatabase",
+            "format": "Geodatabase",
+            "download_url": "https://data.humdata.org/dataset/401d3fae-4262-48c9-891f-461fd776d49b/resource/bdc91dca-2ac6-4398-ab2b-fb569b0fad2a/download/bgd_adminboundaries_candidate.gdb.zip",
+            "id": "bdc91dca-2ac6-4398-ab2b-fb569b0fad2a",
+            "last_modified": "2020-11-17T09:09:29.178934",
+            "metadata_modified": "2025-02-25T21:08:34.241452",
+            "microdata": false,
+            "dataset_id": "401d3fae-4262-48c9-891f-461fd776d49b",
+            "resource_type": "file.upload",
+            "name": "BGD_AdminBoundaries_candidate.gdb.zip",
+            "mimetype": "application/x-zip-compressed",
+            "size": "98.9M"
+        }
+    ]
+}
