@@ -16,7 +16,7 @@ const items = [
 
 const Totalorders = () => {
     return (
-        <div className="flex flex-wrap gap-4">
+        <div className="flex justify-evenly items-center flex-wrap gap-4">
             {items.map((item, index) => {
                 const Icon = item.logo;
                 return (
