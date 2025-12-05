@@ -1,4 +1,4 @@
-import { connectDB } from "@/lib/dib";
+import { connectDB } from "@/lib/db";
 import   Product  from '@/models/product';
 
 export const GET = async  ()=>{
