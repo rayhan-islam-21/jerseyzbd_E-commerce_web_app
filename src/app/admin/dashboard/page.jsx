@@ -6,12 +6,9 @@ import { CartesianGrid, Line, LineChart, Tooltip, XAxis } from "recharts";
 
 const Dashboard = () => {
   return (
-    <div className="grid md:grid-cols-2 grid-cols-1 p-4 gap-6">
+    <div className="grid md:grid-cols-2 grid-cols-1 p-4 ">
       <Totalorders />
       <Performance />
-      <div className="md:col-span-1">
-
-      </div>
     </div>
   );
 };

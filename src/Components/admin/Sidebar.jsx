@@ -22,7 +22,7 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       name: "Products",
       icon: <FaBoxOpen />,
       subMenu: [
-        { name: "All Products", path: "/admin/products" },
+        { name: "All Products", path: "/admin/products/allproducts" },
         { name: "Add Product", path: "/admin/products/add" },
         { name: "Categories", path: "/admin/products/categories" },
       ],
@@ -41,9 +41,9 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
       {/* Sidebar */}
       <div
         className={`
-          bg-[linear-gradient(168deg,#000000,#0d111c)] text-white h-screen border-r border-r-white/10 transition-all duration-200 ease-in-out
+          bg-[linear-gradient(168deg,#000000,#0d111c)] text-white min-h-screen border-r border-r-white/10 transition-all duration-200 ease-in-out
           overflow-hidden
-          fixed inset-y-0 left-0 z-50
+          fixed top-0 inset-y-0 left-0 z-50
           ${sidebarOpen ? "w-64 translate-x-0" : "w-0 -translate-x-full"}
           md:relative md:translate-x-0 md:flex md:flex-col
         `}
