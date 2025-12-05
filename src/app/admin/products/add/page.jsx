@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Button } from "@/Components/ui/button";
 import toast, { Toaster } from "react-hot-toast";
+import ProductImage from "@/Components/ProductImage";
 
 export default function ProductForm() {
   const {
@@ -27,6 +28,41 @@ export default function ProductForm() {
       isFeatured: false,
     },
   });
+
+  const [images, setImages] = useState([]); // store uploaded image URLs
+  const [loadingImages, setLoadingImages] = useState(false);
+
+  // --- Image Upload Handler ---
+  const handleImageUpload = async (e) => {
+    const files = e.target.files;
+    if (!files) return;
+    setLoadingImages(true);
+    const uploadedUrls = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const formData = new FormData();
+      formData.append("file", files[i]);
+      formData.append(
+        "upload_preset",
+        `${process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}`
+      );
+
+      try {
+        const res = await fetch(
+          `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/image/upload`,
+          { method: "POST", body: formData }
+        );
+        const data = await res.json();
+        uploadedUrls.push(data.secure_url);
+      } catch (error) {
+        console.error("Upload error:", error);
+        toast.error("Image upload failed!");
+      }
+    }
+
+    setImages((prev) => [...prev, ...uploadedUrls]);
+    setLoadingImages(false);
+  };
 
   // ---- AUTO SLUG ----
   const toSlug = (text) =>
@@ -58,26 +94,32 @@ export default function ProductForm() {
     setDiscountPrice(discounted.toFixed(2));
   }, [price, discount]);
 
-  const notify = ()=>{
+  const notify = () => {
     toast.success("Jersey added successfully!", { duration: 3000 });
-  }
+  };
 
   const onSubmit = (data) => {
+    if (images.length === 0) {
+      toast.error("Please upload at least one image!");
+      return;
+    }
     const payload = {
       ...data,
       discountPrice,
       tags: data.productTags.split(",").map((tag) => tag.trim()),
+      images,
     };
     console.log("Form Submitted:", payload);
     notify();
 
     reset();
+    setImages([]); // reset images after submission
   };
 
   return (
     <div className="min-h-screen  p-6 md:p-10 flex justify-center items-start">
-        <Toaster position="top-right" reverseOrder={false} />
-       
+      <Toaster position="top-right" reverseOrder={false} />
+
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-gray-800/20 p-6 md:p-8 rounded-xl shadow-lg w-full max-w-4xl"
@@ -153,6 +195,29 @@ export default function ProductForm() {
               <ErrorMsg>{errors.productCategory.message}</ErrorMsg>
             )}
           </div>
+          <div className="mb-6">
+            <Label htmlFor="productImage">Product Image</Label>
+            <Input
+              type="file"
+              accept="image/*"
+              onChange={handleImageUpload}
+              className="w-full p-3 border border-gray-600 rounded-lg text-gray-200 bg-gray-700"
+            />
+            {loadingImages && (
+              <p className="text-sm text-yellow-400 mt-2">
+                Uploading images...
+              </p>
+            )}
+            <div className="flex gap-4 mt-4 flex-wrap">
+              {images.map((img, idx) => (
+                <ProductImage key={idx} src={img} width={100} height={100} />
+              ))}
+            </div>
+            {images.length === 0 && (
+              <ErrorMsg>At least one image is required</ErrorMsg>
+            )}
+          </div>
+
           <div>
             <Label htmlFor="productStock">Stock</Label>
             <Input
