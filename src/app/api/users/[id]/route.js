@@ -1,4 +1,4 @@
-import {User} from "../../../../models/user";
+import User from "../../../../models/user";
 import { connectDB } from "@/lib/db"; // 👈 Make sure to import your DB connection
 import { NextResponse } from "next/server";
 
