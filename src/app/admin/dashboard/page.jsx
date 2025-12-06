@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 
 import Performance from "@/Components/admin/Performance";
 import Totalorders from "@/Components/admin/Totalorders";
