@@ -3,19 +3,17 @@ const { Schema } = mongoose;
 
 const ProductSchema = new Schema(
   {
-    name: { type: String, required: true },
-    slug: { type: String, required: true, unique: true },
-    price: { type: Number, required: true },
-    discount: { type: Number, default: 0 },
+    productName: { type: String, required: true },
+    productSlug: { type: String, required: true, unique: true },
+    productPrice: { type: Number, required: true },
+    productDiscount: { type: Number, default: 0 },
     discountPrice: { type: Number },
-    category: { type: String, required: true },
-    details: { type: String, required: true },
+    productCategory: { type: String, required: true },
+    productDetails: { type: String, required: true },
     image: { type: String, required: true },
     images: { type: [String], default: [] },
-    stock: { type: Number, required: true, default: 0 },
-    ratings: { type: Number, default: 0 },
-    ratingsCount: { type: Number, default: 0 },
-    tags: [String],
+    productStock: { type: Number, required: true, default: 0 },
+    productTags: [String],
     isFeatured: { type: Boolean, default: false },
   },
   { timestamps: true }

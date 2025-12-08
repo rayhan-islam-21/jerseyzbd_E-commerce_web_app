@@ -1,12 +1,11 @@
 "use client";
-
 import { useForm, Controller } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { Button } from "@/Components/ui/button";
 import toast, { Toaster } from "react-hot-toast";
 import { IoMdCloudUpload } from "react-icons/io";
-
 import ProductImage from "@/Components/ProductImage";
+import saveProductTodb from "@/lib/saveProductTodb";
 
 export default function ProductForm() {
   const {
@@ -109,7 +108,7 @@ export default function ProductForm() {
     toast.success("Jersey added successfully!", { duration: 3000 });
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     if (images.length === 0) {
       toast.error("Please upload at least one image!");
       return;
@@ -118,9 +117,11 @@ export default function ProductForm() {
       ...data,
       discountPrice,
       tags: data.productTags.split(",").map((tag) => tag.trim()),
-      images,
+      image: images[0],
+      images: images.slice(1),
     };
     console.log("Form Submitted:", payload);
+   await saveProductTodb(payload);
     notify();
 
     reset();
@@ -153,7 +154,9 @@ export default function ProductForm() {
                   border-2 border-dashed border-gray-500 rounded-xl 
                   hover:border-gray-300 transition cursor-pointer bg-gray-700"
           >
-            <div className={`${uploaded ? "hidden" : "block  place-items-center"}`}>
+            <div
+              className={`${uploaded ? "hidden" : "block  place-items-center"}`}
+            >
               <IoMdCloudUpload className="text-5xl text-gray-300 mb-2" />
 
               <p className="text-gray-300 text-sm font-medium">
