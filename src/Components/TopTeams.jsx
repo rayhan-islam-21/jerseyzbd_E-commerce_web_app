@@ -30,7 +30,7 @@ const TopTeams = () => {
           {loopTeams.map((team, index) => (
             <div
               key={index}
-              className="min-w-[140px] md:min-w-[180px] bg-white p-4 rounded-xl shadow-sm hover:shadow-md transition-all hover:scale-105 cursor-pointer border flex flex-col items-center"
+              className="min-w-[140px] md:min-w-[180px]  p-4 rounded-xl shadow-sm hover:shadow-md transition-all hover:scale-105 cursor-pointer border flex flex-col items-center"
             >
               <div className="relative w-16 h-16 md:w-20 md:h-20">
                 <Image
