@@ -38,62 +38,8 @@ import { FaRegPenToSquare } from "react-icons/fa6";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { Button } from "../ui/button";
 import api from "@/lib/axios";
-
-// --------------------------
-// Sample Product Data
-// --------------------------
-const items = [
-  {
-    id: "1",
-    product: "Black Chair",
-    productImage:
-      "https://cdn.shadcnstudio.com/ss-assets/products/product-1.png",
-    fallback: "BC",
-    price: 159,
-    availability: "In Stock",
-    category: 3.9,
-  },
-  {
-    id: "2",
-    product: "Nike Jordan",
-    productImage:
-      "https://cdn.shadcnstudio.com/ss-assets/products/product-2.png",
-    fallback: "NJ",
-    price: 599,
-    availability: "Limited",
-    category: 4.4,
-  },
-  {
-    id: "3",
-    product: "OnePlus 7 Pro",
-    productImage:
-      "https://cdn.shadcnstudio.com/ss-assets/products/product-3.png",
-    fallback: "O7P",
-    price: 1299,
-    availability: "Out of Stock",
-    category: 3.5,
-  },
-  {
-    id: "4",
-    product: "Nintendo Switch",
-    productImage:
-      "https://cdn.shadcnstudio.com/ss-assets/products/product-4.png",
-    fallback: "NS",
-    price: 499,
-    availability: "In Stock",
-    category: 4.9,
-  },
-  {
-    id: "5",
-    product: "Apple magic mouse",
-    productImage:
-      "https://cdn.shadcnstudio.com/ss-assets/products/product-5.png",
-    fallback: "AMM",
-    price: 970,
-    availability: "Limited",
-    category: 4.1,
-  },
-];
+import { TbCurrencyTaka } from "react-icons/tb";
+import { Spinner } from "../ui/spinner";
 
 //edit and delete function
 function handleEdit(item) {
@@ -141,8 +87,9 @@ const columns = [
     accessorKey: "product",
     cell: ({ row }) => (
       <div className="flex items-center gap-3">
-        <Avatar className="rounded-sm">
+        <Avatar className="rounded">
           <AvatarImage
+            className="object-center  object-cover"
             src={row.original.productImage}
             alt={row.original.fallback}
           />
@@ -160,8 +107,15 @@ const columns = [
     header: "Price",
     accessorKey: "price",
     cell: ({ row }) => (
-      <div className={row.getIsSelected() ? "text-black" : "text-white/80"}>
-        ${row.getValue("price")}
+      <div
+        className={
+          row.getIsSelected()
+            ? "text-black flex items-center"
+            : "text-white/80 flex items-center"
+        }
+      >
+        <TbCurrencyTaka />
+        {row.getValue("price")}
       </div>
     ),
     enableSorting: false,
@@ -245,22 +199,32 @@ export default function ProductTable() {
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const res = await api.get("/product");
-        console.log(res.data);
-        setData(res.data);
-        setLoading(false);
+        const mappedData = res.data.map((item) => ({
+          id: item._id,
+          product: item.productName,
+          productImage: item.image,
+          availability: item.productStock > 0 ? "In Stock" : "Out of Stock",
+          price: item.discountPrice,
+          category: item.productCategory,
+          fallback: item.productName.slice(0, 2).toUpperCase(),
+        }));
+
+        setData(mappedData);
       } catch (error) {
         console.error(error);
-        setLoading(false);
-      }
+      }finally {
+      setLoading(false); // stop loader
+    }
     };
 
     fetchData();
   }, []);
 
   const table = useReactTable({
-    data:data,
+    data: data,
     columns,
     state: { sorting, columnFilters },
     onColumnFiltersChange: setColumnFilters,
@@ -276,77 +240,80 @@ export default function ProductTable() {
 
   return (
     <div className="w-full">
-      <div className="rounded-md border">
-        <div className="flex flex-wrap gap-3 px-2 py-6">
-          <div className="w-44">
-            <Filter column={table.getColumn("product")} />
+      {loading ? (
+        <Button disabled size="sm">
+          <Spinner />
+          Loading...
+        </Button>
+      ) : (
+        <div className="rounded-md border">
+          <div className="flex flex-wrap gap-3 px-2 py-6">
+            <div className="w-44">
+              <Filter column={table.getColumn("product")} />
+            </div>
+            <div className="w-36">
+              <Filter column={table.getColumn("price")} />
+            </div>
+            <div className="w-44">
+              <Filter column={table.getColumn("availability")} />
+            </div>
+            <div className="w-36">
+              <Filter column={table.getColumn("category")} />
+            </div>
           </div>
-          <div className="w-36">
-            <Filter column={table.getColumn("price")} />
-          </div>
-          <div className="w-44">
-            <Filter column={table.getColumn("availability")} />
-          </div>
-          <div className="w-36">
-            <Filter column={table.getColumn("category")} />
-          </div>
-        </div>
 
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id} className="bg-white/80">
-                {headerGroup.headers.map((header) => (
-                  <TableHead
-                    key={header.id}
-                    className="relative h-10 border-t select-none"
-                  >
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-
-          <TableBody>
-            {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
+          <Table>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id} className="bg-white/80">
+                  {headerGroup.headers.map((header) => (
+                    <TableHead
+                      key={header.id}
+                      className="relative h-10 border-t select-none"
+                    >
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
                   ))}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+              ))}
+            </TableHeader>
 
-      <p className="text-muted-foreground mt-4 text-center text-sm">
-        Data table with column filter
-      </p>
+            <TableBody>
+              {table.getRowModel().rows.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      )}
     </div>
   );
 }
