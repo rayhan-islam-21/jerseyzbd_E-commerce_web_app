@@ -1,10 +1,11 @@
+import ProductTable from '@/Components/admin/ProductTable';
 import React from 'react';
 
 const page = () => {
     return (
-        <div>
-            <h1>all</h1>
-        </div>
+        <>
+           <ProductTable/>
+        </>
     );
 };
 
