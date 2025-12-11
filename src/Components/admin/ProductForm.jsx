@@ -85,11 +85,15 @@ export default function ProductForm() {
 
   const productName = watch("productName");
 
-  useEffect(() => {
-    if (productName) {
-      setValue("productSlug", toSlug(productName));
-    }
-  }, [productName, setValue]);
+useEffect(() => {
+  if (productName) {
+    const baseSlug = toSlug(productName);
+    console.log(Date.now)
+    const uniqueSlug = `${baseSlug}-${Date.now()}`; // ensures uniqueness
+    setValue("productSlug", uniqueSlug);
+  }
+}, [productName, setValue]);
+
 
   const price = watch("productPrice");
   const discount = watch("productDiscount");
@@ -115,13 +119,19 @@ export default function ProductForm() {
     }
     const payload = {
       ...data,
-      discountPrice,
-      tags: data.productTags.split(",").map((tag) => tag.trim()),
+      productPrice: Number(data.productPrice),
+      productDiscount: Number(data.productDiscount),
+      discountPrice: Number(discountPrice), // already calculated
+      productStock: Number(data.productStock),
+      productTags: data.productTags
+        ? data.productTags.split(",").map((tag) => tag.trim())
+        : [],
       image: images[0],
       images: images.slice(1),
+      isFeatured: Boolean(data.isFeatured),
     };
     console.log("Form Submitted:", payload);
-   await saveProductTodb(payload);
+    await saveProductTodb(payload);
     notify();
 
     reset();

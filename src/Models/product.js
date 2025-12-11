@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 const ProductSchema = new Schema(
   {
     productName: { type: String, required: true },
-    productSlug: { type: String, required: true, unique: true },
+    productSlug: { type: String, required: true },
     productPrice: { type: Number, required: true },
     productDiscount: { type: Number, default: 0 },
     discountPrice: { type: Number },
@@ -21,10 +21,3 @@ const ProductSchema = new Schema(
 
 export default mongoose.models.Product ||
   mongoose.model("Product", ProductSchema);
-
-
-
-
-
-
-
