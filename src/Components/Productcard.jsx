@@ -1,77 +1,63 @@
-"use client";
+'use client'
 
-import { useState } from "react";
+import { useState } from 'react'
+import Image from 'next/image'
+import { HeartIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { cn } from '@/lib/utils'
 
-import { HeartIcon } from "lucide-react";
-
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardHeader,
-  CardDescription,
-  CardTitle,
-  CardFooter,
-  CardContent,
-} from "../Components/ui/card";
-
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-
-const Productcard = ({ product }) => {
-  const [liked, setLiked] = useState(false);
-  console.log(product);
+const ProductCard = ({ product }) => {
+  const [liked, setLiked] = useState(false)
 
   return (
-    <div className="relative max-w-md rounded-xl bg-gradient-to-r from-neutral-600 to-violet-300 pt-0 shadow-lg">
-      <div className="flex  items-center justify-center">
+    <div className="relative max-w-sm rounded-xl bg-white shadow-lg overflow-hidden transform transition-all hover:scale-105">
+      {/* Product Image */}
+      <div className="relative h-60 w-full">
         <Image
-          className="object-cover w-full"
           src={product.image}
-          alt="jersey_image"
-          width={200}
-          height={200}
+          alt={product.productName}
+          fill
+          className="object-cover"
         />
+        {/* Like Button */}
+        <button
+          onClick={() => setLiked(!liked)}
+          className="absolute top-2 right-2 bg-white/70 hover:bg-white rounded-full p-1 shadow"
+        >
+          <HeartIcon
+            className={cn(
+              liked ? 'fill-red-600 stroke-red-600' : 'stroke-gray-800',
+              'w-5 h-5'
+            )}
+          />
+          <span className="sr-only">Like</span>
+        </button>
       </div>
-      <Button
-        size="icon"
-        onClick={() => setLiked(!liked)}
-        className="bg-primary/10 hover:bg-primary/20 absolute top-4 right-4 rounded-full"
-      >
-        <HeartIcon
-          className={cn(
-            liked ? "fill-destructive stroke-destructive" : "stroke-white"
-          )}
-        />
-        <span className="sr-only">Like</span>
-      </Button>
-      <Card className="border-none">
-        <CardHeader>
-          <CardTitle>{product.productName}</CardTitle>
-          <CardDescription className="flex items-center gap-2">
-            <Badge variant="outline" className="rounded-sm">
-              EU38
-            </Badge>
-            <Badge variant="outline" className="rounded-sm">
-              Black and White
-            </Badge>
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <p>{product.productDetails}</p>
-        </CardContent>
-        <CardFooter className="justify-between gap-3 max-sm:flex-col max-sm:items-stretch">
-          <div className="flex flex-col">
-            <span className="text-sm font-medium uppercase">Price</span>
-            <span className="text-xl font-semibold">
-              {product.productPrice}
-            </span>
-          </div>
-          <Button size="lg">Add to cart</Button>
-        </CardFooter>
-      </Card>
-    </div>
-  );
-};
 
-export default Productcard;
+      {/* Product Info */}
+      <div className="p-4 flex flex-col gap-2">
+        <h3 className="text-lg font-semibold">{product.productName}</h3>
+        <p className="text-gray-700 text-sm line-clamp-2">{product.productDetails}</p>
+
+        {/* Example Tags */}
+        <div className="flex flex-wrap gap-2">
+          <Badge variant="outline" className="rounded-sm">
+            EU38
+          </Badge>
+          <Badge variant="outline" className="rounded-sm">
+            Black & White
+          </Badge>
+        </div>
+
+        {/* Price & Add to Cart */}
+        <div className="mt-2 flex justify-between items-center">
+          <span className="text-xl font-bold">{product.productPrice} Taka</span>
+          <Button size="sm">Add to Cart</Button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default ProductCard
