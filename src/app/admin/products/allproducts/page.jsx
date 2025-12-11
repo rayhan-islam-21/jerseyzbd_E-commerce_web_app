@@ -3,7 +3,7 @@ import React from 'react';
 
 const page = () => {
     return (
-        <div className='flex flex-col gap-6  p-4 h-screen'>
+        <div className='flex flex-col gap-6  p-4 min-h-screen'>
             <h1 className='text-2xl text-white font-bold'>All Product List</h1>
            <ProductTable/>
         </div>

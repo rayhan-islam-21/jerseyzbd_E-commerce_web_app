@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { IoMdCloudUpload } from "react-icons/io";
 import ProductImage from "@/Components/ProductImage";
 import saveProductTodb from "@/lib/saveProductTodb";
+import { TbCurrencyTaka } from "react-icons/tb";
 
 export default function ProductForm() {
   const {
@@ -21,7 +22,7 @@ export default function ProductForm() {
       productName: "",
       productSlug: "",
       productPrice: 50.0,
-      productDiscount: 10,
+      productDiscount: 0,
       productCategory: "",
       productDetails: "",
       productStock: 100,
@@ -85,15 +86,14 @@ export default function ProductForm() {
 
   const productName = watch("productName");
 
-useEffect(() => {
-  if (productName) {
-    const baseSlug = toSlug(productName);
-    console.log(Date.now)
-    const uniqueSlug = `${baseSlug}-${Date.now()}`; // ensures uniqueness
-    setValue("productSlug", uniqueSlug);
-  }
-}, [productName, setValue]);
-
+  useEffect(() => {
+    if (productName) {
+      const baseSlug = toSlug(productName);
+      console.log(Date.now);
+      const uniqueSlug = `${baseSlug}-${Date.now()}`; // ensures uniqueness
+      setValue("productSlug", uniqueSlug);
+    }
+  }, [productName, setValue]);
 
   const price = watch("productPrice");
   const discount = watch("productDiscount");
@@ -228,7 +228,7 @@ useEffect(() => {
         {/* Price, Discount, Discount Price */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 items-end">
           <div>
-            <Label htmlFor="productPrice">Price ($)</Label>
+            <Label htmlFor="productPrice">Price </Label>
             <Input
               type="number"
               {...register("productPrice", { required: true, min: 0 })}
@@ -245,8 +245,9 @@ useEffect(() => {
           </div>
           <div className="p-3 bg-gray-700 border border-gray-600 rounded-lg text-sm">
             <p className="font-medium text-gray-200">Discount Price:</p>
-            <span className="text-2xl font-bold text-yellow-400">
-              ${discountPrice}
+            <span className="text-2xl flex items-center font-bold text-yellow-400">
+              <TbCurrencyTaka />
+              {discountPrice}
             </span>
           </div>
         </div>

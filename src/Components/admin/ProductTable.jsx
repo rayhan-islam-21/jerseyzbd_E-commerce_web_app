@@ -43,19 +43,11 @@ import { Spinner } from "../ui/spinner";
 
 //edit and delete function
 function handleEdit(item) {
-  console.log("Edit", item);
-  // You can redirect to an edit page or open a modal
-  // e.g., router.push(`/admin/products/edit/${item.id}`)
+ 
 }
 
 function handleDelete(item) {
-  console.log("Delete", item);
-  // Show confirmation first
-  if (confirm(`Are you sure you want to delete ${item.product}?`)) {
-    // Remove the item from your state or call your API
-    // Example for local state:
-    setItems((prev) => prev.filter((i) => i.id !== item.id));
-  }
+
 }
 
 // --------------------------
@@ -158,7 +150,7 @@ const columns = [
       </div>
     ),
     meta: {
-      filterVariant: "range",
+      filterVariant: "select",
     },
   },
   {
@@ -246,7 +238,7 @@ export default function ProductTable() {
           Loading...
         </Button>
       ) : (
-        <div className="rounded-md border">
+        <div className="rounded-md border border-gray-700/80 p-6">
           <div className="flex flex-wrap gap-3 px-2 py-6">
             <div className="w-44">
               <Filter column={table.getColumn("product")} />
@@ -265,11 +257,11 @@ export default function ProductTable() {
           <Table>
             <TableHeader>
               {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id} className="bg-white/80">
+                <TableRow key={headerGroup.id} className="">
                   {headerGroup.headers.map((header) => (
                     <TableHead
                       key={header.id}
-                      className="relative h-10 border-t select-none"
+                      className="relative h-10 border-t border-t-gray-400 text-white select-none"
                     >
                       {header.isPlaceholder
                         ? null
