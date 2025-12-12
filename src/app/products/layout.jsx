@@ -1,32 +1,43 @@
-  "use client";
+"use client";
 
-  import React from "react";
-  import Header from "@/Components/Header";
-  import ProductSidebar from "@/Components/ui/ProductSidebar";
+import React from "react";
+import Header from "@/Components/Header";
+import ProductSidebar from "@/Components/ui/ProductSidebar";
+import { usePathname } from "next/navigation";
 
-  const Layout = ({ children }) => {
-    return (
-      <div className="min-h-screen relative bg-[#f2f0f1]/80 dark:bg-gray-900 flex">
-        {/* Sidebar */}
-        <aside className="w-72 shrink-0 sticky top-0 h-screen   ">
-          <ProductSidebar />
-        </aside>
+const Layout = ({ children }) => {
+  const pathname = usePathname();
 
-        {/* Main content */}
-        <main className="flex-1 flex flex-col">
-          {/* Header */}
-          <div className="sticky top-0 z-20">
-            <Header />
-          </div>
+  return (
+    <div className="min-h-screen bg-[#f2f0f1]/80 dark:bg-gray-900">
+      {/* Fixed Sidebar */}
+      <aside className="w-72 fixed top-0 left-0 h-screen bg-white shadow-md z-30">
+        <ProductSidebar />
+      </aside>
 
-          {/* Page content */}
-          <div className="flex-1 p-10 overflow-auto">
-            <h1 className="ml-6 mb-4 text-2xl text-gray-900 font-bold">All Products</h1>
-            {children}
-            </div>
-        </main>
+      {/* Main Section shifted by sidebar width */}
+      <div className="ml-72 flex flex-col min-h-screen">
+        {/* Sticky Header */}
+        <div className="sticky top-0 z-20 bg-white shadow-sm">
+          <Header />
+        </div>
+
+        {/* Page content */}
+        <div className="flex-1 p-10 overflow-auto">
+          {pathname === "/products" ? (
+            <h1 className="ml-6 mb-4 text-2xl text-gray-900 font-bold">
+              All Products
+            </h1>
+          ) : (
+            <h1 className="ml-6 mb-4 text-2xl text-gray-900 font-bold">
+              Product Details
+            </h1>
+          )}
+          {children}
+        </div>
       </div>
-    );
-  };
+    </div>
+  );
+};
 
-  export default Layout;
+export default Layout;
