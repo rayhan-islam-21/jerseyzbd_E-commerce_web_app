@@ -11,9 +11,9 @@ const ProductCard = ({ product }) => {
   const [liked, setLiked] = useState(false)
 
   return (
-    <div className="relative max-w-sm rounded-xl bg-white shadow-lg overflow-hidden transform transition-all hover:scale-105">
+  <div className="relative max-w-sm rounded-xl bg-[#FFFFFF] shadow-lg overflow-hidden ">
       {/* Product Image */}
-      <div className="relative h-60 w-full">
+      <div className="relative h-96 w-full transform transition-all hover:scale-105 ">
         <Image
           src={product.image}
           alt={product.productName}
@@ -53,7 +53,7 @@ const ProductCard = ({ product }) => {
         {/* Price & Add to Cart */}
         <div className="mt-2 flex justify-between items-center">
           <span className="text-xl font-bold">{product.productPrice} Taka</span>
-          <Button size="sm">Add to Cart</Button>
+          <Button className="cursor-pointer" size="sm">Add to Cart</Button>
         </div>
       </div>
     </div>

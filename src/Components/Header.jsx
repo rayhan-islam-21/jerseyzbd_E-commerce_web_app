@@ -79,7 +79,7 @@ const Header = () => {
   const id = useId();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
-    <header className="relative w-full backdrop-blur-xl bg-[#f2f0f1]/80 dark:bg-black/80 border-gray-200 dark:border-gray-700 ">
+    <header className="relative w-full backdrop-blur-xl  bg-[#FFFFFF] dark:bg-black/80 border-gray-200 dark:border-gray-700 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {}

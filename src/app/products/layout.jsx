@@ -1,27 +1,32 @@
-"use client";
+  "use client";
 
-import React from "react";
-import  Header  from "@/Components/Header";
-import ProductSidebar from "@/Components/ui/ProductSidebar";
+  import React from "react";
+  import Header from "@/Components/Header";
+  import ProductSidebar from "@/Components/ui/ProductSidebar";
 
-const Layout = ({ children }) => {
-  return (
-    <div className="flex flex-col min-h-screen">
-      {/* Header at top */}
-      <Header />
-
-      {/* Main content with sidebar */}
-      <div className="flex flex-1">
+  const Layout = ({ children }) => {
+    return (
+      <div className="min-h-screen relative bg-[#f2f0f1]/80 dark:bg-gray-900 flex">
         {/* Sidebar */}
-        <aside className="w-64 bg-gray-100 border-r border-gray-300">
-      <ProductSidebar/>
+        <aside className="w-72 shrink-0 sticky top-0 h-screen   ">
+          <ProductSidebar />
         </aside>
 
         {/* Main content */}
-        <main className="flex-1 p-6 bg-gray-50">{children}</main>
-      </div>
-    </div>
-  );
-};
+        <main className="flex-1 flex flex-col">
+          {/* Header */}
+          <div className="sticky top-0 z-20">
+            <Header />
+          </div>
 
-export default Layout;
+          {/* Page content */}
+          <div className="flex-1 p-10 overflow-auto">
+            <h1 className="ml-6 mb-4 text-2xl text-gray-900 font-bold">All Products</h1>
+            {children}
+            </div>
+        </main>
+      </div>
+    );
+  };
+
+  export default Layout;
