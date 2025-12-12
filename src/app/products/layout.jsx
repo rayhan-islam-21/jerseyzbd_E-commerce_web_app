@@ -1,9 +1,8 @@
 "use client";
 
 import React from "react";
-
-import  Sidebar  from "@/Components/admin/Sidebar";
 import  Header  from "@/Components/Header";
+import ProductSidebar from "@/Components/ui/ProductSidebar";
 
 const Layout = ({ children }) => {
   return (
@@ -15,7 +14,7 @@ const Layout = ({ children }) => {
       <div className="flex flex-1">
         {/* Sidebar */}
         <aside className="w-64 bg-gray-100 border-r border-gray-300">
-          <Sidebar />
+      <ProductSidebar/>
         </aside>
 
         {/* Main content */}

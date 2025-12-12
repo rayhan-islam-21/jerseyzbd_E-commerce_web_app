@@ -7,6 +7,7 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 import { ShoppingBag } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import { usePathname } from "next/navigation";
 
 const MenuIcon = () => (
   <svg
@@ -65,7 +66,7 @@ const navigationLinks = [
     label: "Categories",
   },
   {
-    href: "/all-products",
+    href: "/products",
     label: "Products",
   },
   {
@@ -74,6 +75,7 @@ const navigationLinks = [
   },
 ];
 const Header = () => {
+  const pathname = usePathname();
   const id = useId();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   return (
@@ -100,7 +102,10 @@ const Header = () => {
                   <NavigationMenuItem key={index}>
                     <NavigationMenuLink
                       href={link.href}
-                      className="text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white font-medium relative group transition-all duration-300"
+                      className={`text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white font-medium relative group transition-all duration-300
+                        ${pathname===link.href? "text-red-600 border-b-4 border-b-red-500 dark:text-red-400 font-semibold":""}
+                      `}
+                      
                     >
                       {link.label}
                       <span className="absolute -bottom-1 left-0 w-0 h-1 bg-red-500 dark:bg-white transition-all duration-300 group-hover:w-full"></span>
