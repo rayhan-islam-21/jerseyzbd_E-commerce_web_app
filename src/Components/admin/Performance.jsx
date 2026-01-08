@@ -32,13 +32,13 @@ const Performance = () => {
         <ResponsiveContainer>
           <BarChart  data={data}>
             <defs>
-              {/* Gradient for visitors */}
+
               <linearGradient id="visitorsGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#4ade80" stopOpacity={1} />
                 <stop offset="100%" stopColor="#4ade80" stopOpacity={0.3} />
               </linearGradient>
 
-              {/* Gradient for sales */}
+   
               <linearGradient id="salesGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor="#60a5fa" stopOpacity={1} />
                 <stop offset="100%" stopColor="#60a5fa" stopOpacity={0.3} />
@@ -58,10 +58,10 @@ const Performance = () => {
               axisLine={{ stroke: "#666" }}
             />
 
-            {/* Custom Tooltip */}
+
             <Tooltip
               contentStyle={{
-                background: "#1f2937", // dark card
+                background: "#1f2937", 
                 border: "none",
                 borderRadius: "8px",
                 padding: "10px",
@@ -73,7 +73,7 @@ const Performance = () => {
 
             <Legend wrapperStyle={{ color: "#fff" }} />
 
-            {/* Curved bars with hover effect */}
+
             <Bar
             className="select-none"
               dataKey="visitors"
